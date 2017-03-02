@@ -3,8 +3,17 @@ package com.devices1.com.myseries.model;
 
 import android.content.Context;
 
+import com.devices1.com.myseries.model.database.ISeriesDB;
+import com.devices1.com.myseries.model.database.MockSeriesDB;
+import com.devices1.com.myseries.model.network.ISeriesServer;
+import com.devices1.com.myseries.model.network.MockSeriesServer;
+import com.devices1.com.myseries.model.network.ResponseReceiver;
+
+import java.util.Collections;
+import java.util.List;
+
 public class SeriesModel implements ISeriesModel {
-/*
+
     private ISeriesServer server;
     private ISeriesDB db;
     private static SeriesModel instance = null;
@@ -19,10 +28,27 @@ public class SeriesModel implements ISeriesModel {
         return instance;
     }
 
-    private
-    SeriesModel(ISeriesServer server, ISeriesDB db) {
+    private SeriesModel(ISeriesServer server, ISeriesDB db) {
         this.server = server;
         this.db = db;
     }
-*/
+
+    @Override
+    public void findSeries(String title, final ResponseReceiver<List<SeriesData>> responseReceiver) {
+        server.findSeries(title,
+                new
+                        ResponseReceiver<List<SeriesData>>() {
+                            @Override
+                            public void
+                            onResponseReceived(List<SeriesData> series) {
+                                Collections.sort(series, SeriesData.NAME_COMPARATOR);
+                                responseReceiver.onResponseReceived(series);
+                            }
+                            @Override
+                            public void
+                            onErrorReceived(String message) {
+                                responseReceiver.onErrorReceived(message);
+                            }
+                        });
+    }
 }

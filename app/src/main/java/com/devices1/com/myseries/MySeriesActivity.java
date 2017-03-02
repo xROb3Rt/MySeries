@@ -3,7 +3,6 @@ package com.devices1.com.myseries;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.devices1.com.myseries.addSeries.AddSeriesActivity;
+import com.devices1.com.myseries.model.SeriesModel;
 import com.devices1.com.myseries.mySeries.IMySeriesView;
 import com.devices1.com.myseries.mySeries.MySeriesPresenter;
 
@@ -27,9 +27,13 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        presenter = new MySeriesPresenter(this);
+
         seriesList = (ListView) findViewById(R.id.listViewSeries);
         seriesList.setEmptyView(findViewById(R.id.textNoStored));
+
+        SeriesModel model = SeriesModel.getInstance(this);
+        presenter = new MySeriesPresenter(this, model);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +43,10 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
                 dialog.show(getFragmentManager(), "AskName");
             }
         });
+
+
+
+
     }
 
     @Override
@@ -72,9 +80,9 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
     public void switchToAddSeries(String name) {
         // Create the Intent
         Intent intent = new Intent(this, AddSeriesActivity.class);
-// Add the parameters to AddSeriesActivity
+        // Add the parameters to AddSeriesActivity
         intent.putExtra(AddSeriesActivity.SERIES_TITLE, name);
-// Start the activity:
+        // Start the activity:
         startActivity(intent);
     }
 }
