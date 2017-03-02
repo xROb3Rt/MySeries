@@ -10,4 +10,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.devices1.com.myseries.addSeries.AddSeriesActivity">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progressBar" />
+
+    <TextView
+        android:text="Not Found!"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/not_found_text"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/series_list" />
 </RelativeLayout>

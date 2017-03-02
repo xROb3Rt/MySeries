@@ -29,7 +29,7 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
 
         presenter = new MySeriesPresenter(this);
         seriesList = (ListView) findViewById(R.id.listViewSeries);
-        seriesList.setEmptyView(findViewById(R.id.listViewSeries));
+        seriesList.setEmptyView(findViewById(R.id.textNoStored));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
