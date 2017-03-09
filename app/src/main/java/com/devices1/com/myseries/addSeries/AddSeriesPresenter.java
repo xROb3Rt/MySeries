@@ -5,6 +5,7 @@ import com.devices1.com.myseries.model.ISeriesModel;
 import com.devices1.com.myseries.model.SeriesData;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddSeriesPresenter {
@@ -12,7 +13,9 @@ public class AddSeriesPresenter {
     private String searchedTitle;
     private IAddSeriesView view;
     private ISeriesModel model;
-
+    private List<SeriesData> seriesList;
+    private SeriesData seriesData;
+    private int requestedIndex;
 
     public AddSeriesPresenter(IAddSeriesView view, ISeriesModel model) {
         this.view = view;
@@ -28,7 +31,7 @@ public class AddSeriesPresenter {
                     @Override
                     public void onResponseReceived(List<SeriesData> series) {
                         view.hideSearchInProgress();
-                        //seriesFound(series);
+                        seriesFound(series);
                     }
 
                     @Override
@@ -40,7 +43,31 @@ public class AddSeriesPresenter {
 
     }
 
+    public void seriesFound(List<SeriesData> series) {
 
+        seriesList = series;
 
+        List<String> titles = new ArrayList<String>();
 
+        for (int i = 0; i< series.size(); i++){
+            titles.add(series.get(i).getTitle());
+        }
+
+        view.showTitles(titles);
+
+    }
+
+    public void onAddSeriesRequested(int i){
+
+        requestedIndex = i;
+        view.askConfirmation(seriesData.getTitle(), seriesData.getFirstAired(), seriesData.getSummary());
+
+    }
+
+    /*public void onAddSeriesConfirmed() {
+
+        model.addSeries(series.get(requestedIndex));
+        view.switchToMySeries();
+
+    }*/
 }

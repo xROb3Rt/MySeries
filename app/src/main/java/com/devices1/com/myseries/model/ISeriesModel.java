@@ -8,5 +8,6 @@ import java.util.List;
 public interface ISeriesModel {
 
     void findSeries(String title, ResponseReceiver<List<SeriesData>> responseReceiver);
+    void addSeries(int index);
 
 }

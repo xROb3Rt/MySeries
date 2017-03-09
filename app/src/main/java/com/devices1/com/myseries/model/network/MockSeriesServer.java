@@ -2,10 +2,10 @@ package com.devices1.com.myseries.model.network;
 
 import android.os.AsyncTask;
 
-import com.jvilaruji.myseries.model.EpisodeInfo;
-import com.jvilaruji.myseries.model.SeasonData;
-import com.jvilaruji.myseries.model.SeriesData;
-import com.jvilaruji.myseries.model.database.SeriesAndSeasons;
+import com.devices1.com.myseries.model.EpisodeInfo;
+import com.devices1.com.myseries.model.SeasonData;
+import com.devices1.com.myseries.model.SeriesData;
+import com.devices1.com.myseries.model.database.SeriesAndSeasons;
 
 import java.util.ArrayList;
 import java.util.List;
