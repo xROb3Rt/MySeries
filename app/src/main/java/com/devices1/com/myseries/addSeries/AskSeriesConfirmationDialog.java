@@ -8,18 +8,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.devices1.com.myseries.R;
 
 public class AskSeriesConfirmationDialog extends DialogFragment{
 
+    public static final String TITLE = "title";
+    public static final String SUMMARY = "summary";
+    public static final String AIRED = "aired";
     public IConfirmedListener confirmedListener;
+
     public TextView confirmTitle;
-    public TextView confirmAid;
     public TextView confirmDate;
-    public TextView confirmSum;
     public TextView confirmSummary;
 
 
@@ -30,11 +31,19 @@ public class AskSeriesConfirmationDialog extends DialogFragment{
         Activity context = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = context.getLayoutInflater().inflate(R.layout.ask_confirmation_layout, null);
+
         confirmTitle = (TextView) view.findViewById(R.id.confirmTitle);
-        confirmAid = (TextView) view.findViewById(R.id.confirmAid);
         confirmDate = (TextView) view.findViewById(R.id.confirmDate);
-        confirmSum = (TextView) view.findViewById(R.id.confirmSum);
         confirmSummary = (TextView) view.findViewById(R.id.confirmSummary);
+        Bundle arguments = getArguments();
+        String title = arguments.getString(TITLE);
+        String aired = arguments.getString(AIRED);
+        String summary = arguments.getString(SUMMARY);
+
+        confirmTitle.setText(title);
+        confirmDate.setText(aired);
+        confirmSummary.setText(summary);
+
 
         builder.setView(view);
         builder.setPositiveButton("Add",
@@ -42,7 +51,7 @@ public class AskSeriesConfirmationDialog extends DialogFragment{
                     @Override
                     public void onClick(DialogInterface dialog, int button){
                         if(confirmedListener != null){
-                           // confirmedListener.onConfirmed(seriesNameEdit.getText().toString());
+                            confirmedListener.onConfirmed();
                         }
                     }});
         builder.setNegativeButton("Forget it", null);

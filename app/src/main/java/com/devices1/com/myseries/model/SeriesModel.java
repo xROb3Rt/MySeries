@@ -17,6 +17,7 @@ public class SeriesModel implements ISeriesModel {
     private ISeriesServer server;
     private ISeriesDB db;
     private static SeriesModel instance = null;
+    private List<Integer> seriesIds;
 
     public static SeriesModel getInstance() {
         return instance;
@@ -51,4 +52,22 @@ public class SeriesModel implements ISeriesModel {
                             }
                         });
     }
+
+    @Override
+    public void addSeries(SeriesData seriesData) {
+        db.insertSeriesData(seriesData);
+    }
+
+    @Override
+    public List<Integer> getAllSeries() {
+        seriesIds = db.getAllSeries();
+        return seriesIds;
+    }
+
+    @Override
+    public String getSeriesTitle(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getTitle();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.devices1.com.myseries.addSeries;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.devices1.com.myseries.MySeriesActivity;
 import com.devices1.com.myseries.R;
 import com.devices1.com.myseries.model.SeriesData;
 import com.devices1.com.myseries.model.SeriesModel;
@@ -26,6 +28,13 @@ public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesVi
     private ProgressBar progress_bar;
     private AddSeriesPresenter presenter;
     private TextView notFoundText;
+
+
+    public TextView confirmTitle;
+    public TextView confirmAid;
+    public TextView confirmDate;
+    public TextView confirmSum;
+    public TextView confirmSummary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +103,23 @@ public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesVi
     @Override
     public void askConfirmation(String title, String firstAired, String summary) {
 
+
         AskSeriesConfirmationDialog dialog = new AskSeriesConfirmationDialog();
+        Bundle args = new Bundle();
+        args.putString(AskSeriesConfirmationDialog.TITLE, title);
+        args.putString(AskSeriesConfirmationDialog.AIRED, firstAired);
+        args.putString(AskSeriesConfirmationDialog.SUMMARY, summary);
+        dialog.setArguments(args);
         dialog.show(getFragmentManager(), "AskConfirmation");
 
+
+
+    }
+
+    @Override
+    public void switchToMySeries() {
+        Intent intent = new Intent(this, MySeriesActivity.class);
+        startActivity(intent);
     }
 
     @Override

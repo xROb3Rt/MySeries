@@ -21,4 +21,10 @@ public class MySeriesPresenter {
     }
 
 
+    public void onViewRestarted() {
+
+        model.getAllSeries();
+
+
+    }
 }

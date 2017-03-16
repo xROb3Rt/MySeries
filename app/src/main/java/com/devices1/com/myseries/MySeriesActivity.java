@@ -85,4 +85,10 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
         // Start the activity:
         startActivity(intent);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onViewRestarted();
+    }
 }

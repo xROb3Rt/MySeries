@@ -14,7 +14,6 @@ public class AddSeriesPresenter {
     private IAddSeriesView view;
     private ISeriesModel model;
     private List<SeriesData> seriesList;
-    private SeriesData seriesData;
     private int requestedIndex;
 
     public AddSeriesPresenter(IAddSeriesView view, ISeriesModel model) {
@@ -60,14 +59,15 @@ public class AddSeriesPresenter {
     public void onAddSeriesRequested(int i){
 
         requestedIndex = i;
+        SeriesData seriesData = seriesList.get(i);
         view.askConfirmation(seriesData.getTitle(), seriesData.getFirstAired(), seriesData.getSummary());
 
     }
 
-    /*public void onAddSeriesConfirmed() {
+    public void onAddSeriesConfirmed() {
 
-        model.addSeries(series.get(requestedIndex));
+        model.addSeries(seriesList.get(requestedIndex));
         view.switchToMySeries();
 
-    }*/
+    }
 }
