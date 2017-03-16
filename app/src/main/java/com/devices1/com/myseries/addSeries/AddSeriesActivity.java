@@ -5,6 +5,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,7 +19,7 @@ import com.devices1.com.myseries.mySeries.IMySeriesView;
 
 import java.util.List;
 
-public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesView {
+public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesView, AskSeriesConfirmationDialog.IConfirmedListener {
 
     public static final String SERIES_TITLE = "seriesTitle";
     private ListView series_list;
@@ -29,7 +32,7 @@ public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_series);
 
-        series_list = (ListView) findViewById(R.id.listViewSeries);
+        series_list = (ListView) findViewById(R.id.series_list);
         series_list.setEmptyView(findViewById(R.id.not_found_text));
         progress_bar = (ProgressBar) findViewById(R.id.progressBar);
         notFoundText = (TextView) findViewById(R.id.not_found_text);
@@ -73,10 +76,31 @@ public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesVi
         progress_bar.setVisibility(View.GONE);
     }
 
-    /*@Override
-    public void seriesFound(List<SeriesData> series) {
+    @Override
+    public void showTitles(List<String> titles) {
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titles);
 
+        series_list.setAdapter(adapter);
+        series_list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void
+                            onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                presenter.onAddSeriesRequested(i);
+                            }
+                        });
+    }
 
-    }*/
+    @Override
+    public void askConfirmation(String title, String firstAired, String summary) {
 
+        AskSeriesConfirmationDialog dialog = new AskSeriesConfirmationDialog();
+        dialog.show(getFragmentManager(), "AskConfirmation");
+
+    }
+
+    @Override
+    public void onConfirmed() {
+        presenter.onAddSeriesConfirmed();
+    }
 }

@@ -1,7 +1,7 @@
 package com.devices1.com.myseries.model.database;
 
-import com.jvilaruji.myseries.model.SeasonData;
-import com.jvilaruji.myseries.model.SeriesData;
+import com.devices1.com.myseries.model.SeasonData;
+import com.devices1.com.myseries.model.SeriesData;
 
 import java.util.ArrayList;
 import java.util.List;

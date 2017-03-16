@@ -1,7 +1,5 @@
 package com.devices1.com.myseries.addSeries;
 
-import com.devices1.com.myseries.model.SeriesData;
-
 import java.util.List;
 
 public interface IAddSeriesView {
@@ -11,5 +9,9 @@ public interface IAddSeriesView {
 
     void hideSearchInProgress();
     void showError(String message);
-    //void seriesFound(List<SeriesData> series);
+
+    void showTitles(List<String> titles);
+
+    void askConfirmation(String title, String firstAired, String summary);
+    void addSeries(int index);
 }

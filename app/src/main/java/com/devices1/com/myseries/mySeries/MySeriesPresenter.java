@@ -19,4 +19,6 @@ public class MySeriesPresenter {
         view.switchToAddSeries(name);
 
     }
+
+
 }
