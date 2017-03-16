@@ -8,12 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.devices1.com.myseries.addSeries.AddSeriesActivity;
 import com.devices1.com.myseries.model.SeriesModel;
 import com.devices1.com.myseries.mySeries.IMySeriesView;
 import com.devices1.com.myseries.mySeries.MySeriesPresenter;
+
+import java.util.List;
 
 public class MySeriesActivity extends AppCompatActivity implements AskNameDialog.INameListener, IMySeriesView {
 
@@ -91,4 +96,19 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
         super.onStart();
         presenter.onViewRestarted();
     }
+
+    @Override
+    public void displayTitles(List<String> titleList){
+            ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
+
+        seriesList.setAdapter(adapter);
+        seriesList.setOnItemClickListener(
+                    new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void
+                        onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        }
+                    });
+        }
 }
