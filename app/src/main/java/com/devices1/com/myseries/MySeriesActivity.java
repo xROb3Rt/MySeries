@@ -49,9 +49,6 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
             }
         });
 
-
-
-
     }
 
     @Override
@@ -107,8 +104,15 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
                         @Override
                         public void
                         onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                            presenter.onViewSeriesRequested(i);
                         }
                     });
         }
+
+    @Override
+    public void switchToSeries(Integer index){
+        Intent intent = new Intent(this, MySeriesActivity.class);
+        intent.putExtra(SeriesActivity.SERIE_ID,index); //Esto sigue en el 2.2.9 (SeriesActivity)
+        startActivity(intent);
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,17 +18,16 @@
 
         <TextView
             android:text="First Aired:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/confirmAid"
-            android:layout_weight="1" />
+            android:layout_width="77dp"
+            android:layout_height="match_parent"
+            android:id="@+id/confirmAid" />
 
         <TextView
             android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/confirmDate"
-            android:layout_weight="1" />
+            android:layout_weight="0.99" />
 
     </LinearLayout>
 
@@ -39,17 +39,15 @@
 
         <TextView
             android:text="Summary:"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/confirmSum"
-            android:layout_weight="1" />
+            android:layout_width="74dp" />
 
         <TextView
             android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/confirmSummary"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:id="@+id/confirmSummary" />
     </LinearLayout>
 
 </LinearLayout>
