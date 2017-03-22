@@ -29,13 +29,6 @@ public class AddSeriesActivity extends AppCompatActivity implements IAddSeriesVi
     private AddSeriesPresenter presenter;
     private TextView notFoundText;
 
-
-    public TextView confirmTitle;
-    public TextView confirmAid;
-    public TextView confirmDate;
-    public TextView confirmSum;
-    public TextView confirmSummary;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

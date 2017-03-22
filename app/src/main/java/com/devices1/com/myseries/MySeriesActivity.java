@@ -17,6 +17,7 @@ import com.devices1.com.myseries.addSeries.AddSeriesActivity;
 import com.devices1.com.myseries.model.SeriesModel;
 import com.devices1.com.myseries.mySeries.IMySeriesView;
 import com.devices1.com.myseries.mySeries.MySeriesPresenter;
+import com.devices1.com.myseries.series.SeriesActivity;
 
 import java.util.List;
 
@@ -92,11 +93,13 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
     protected void onStart() {
         super.onStart();
         presenter.onViewRestarted();
+
+
     }
 
     @Override
     public void displayTitles(List<String> titleList){
-            ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleList);
 
         seriesList.setAdapter(adapter);
         seriesList.setOnItemClickListener(
@@ -109,9 +112,10 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
                     });
         }
 
+
     @Override
     public void switchToSeries(Integer index){
-        Intent intent = new Intent(this, MySeriesActivity.class);
+        Intent intent = new Intent(this, SeriesActivity.class);
         intent.putExtra(SeriesActivity.SERIE_ID,index); //Esto sigue en el 2.2.9 (SeriesActivity)
         startActivity(intent);
     }

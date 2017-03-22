@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addSeries.AddSeriesActivity"></activity>
+        <activity android:name=".addSeries.AddSeriesActivity" />
+        <activity
+            android:name=".series.SeriesActivity"
+            android:label="@string/title_activity_series"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

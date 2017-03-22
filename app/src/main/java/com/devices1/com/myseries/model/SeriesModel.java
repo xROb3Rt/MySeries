@@ -9,6 +9,7 @@ import com.devices1.com.myseries.model.network.ISeriesServer;
 import com.devices1.com.myseries.model.network.MockSeriesServer;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,6 +67,49 @@ public class SeriesModel implements ISeriesModel {
     public String getSeriesTitle(int id) {
         SeriesData seriesData = db.getSeriesData(id);
         return seriesData.getTitle();
+    }
+
+    @Override
+    public Integer getSeriesNumberOfSeasons(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getNumberOfSeasons();
+    }
+
+    @Override
+    public List<String> getEpisodeTitles(Integer currentSeries, Integer currentSeason) {
+        List<String> episodes = new ArrayList<>();
+        for (int i = 0; i< db.getSeasonData(currentSeries, currentSeason).getEpisodes().size(); i++){
+            episodes.add(db.getSeasonData(currentSeries, currentSeason).getEpisodes().toString());
+        }
+        return episodes;
+    }
+
+    @Override
+    public List<Boolean> getEpisodeViewed(Integer currentSeries, Integer currentSeason) {
+
+        List<Boolean> episodeViewed = new ArrayList<>();
+
+        SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
+        for (EpisodeInfo episode : seasonData.getEpisodes()){
+            episodeViewed.add(episode.isViewed());
+        }
+
+        return episodeViewed;
+    }
+
+    @Override
+    public void setEpisodeViewed(Integer currentSeries, Integer currentSeason, int episode, boolean viewed) {
+        db.setViewed(currentSeries, currentSeason, episode, viewed);
+    }
+
+    @Override
+    public void updateSeasonData(Integer currentSeries, ResponseReceiver<Void> responseReceiver) {
+
+    }
+
+    @Override
+    public void updateSeasonData(Integer currentSeries, Integer currentSeason, ResponseReceiver<Void> responseReceiver) {
+
     }
 
 }
