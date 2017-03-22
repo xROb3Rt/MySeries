@@ -9,4 +9,6 @@ public interface ISeriesView {
     void showSeasons(Integer numberSeasons);
     void showEpisodes(EpisodeData[] episodeData);
     void showSearchInProgress();
+    void hideSearchInProgress();
+    void showError(String error);
 }

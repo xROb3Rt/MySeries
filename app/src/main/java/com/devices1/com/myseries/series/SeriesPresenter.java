@@ -26,28 +26,33 @@ public class SeriesPresenter {
 
     public void onAddSeasonRequested() {
 
-        view.showSearchInProgress(); // MO ESTÁ HECHo EL MÉTODO!!!
+        view.showSearchInProgress();
 
-
-        /*model.updateSeasons(currentSeries, new ResponseReceiver<Integer>() {
+        model.updateSeasons(currentSeries, new ResponseReceiver<Integer>() {
             @Override
-            public void onResponseReceived(Integer numberOfSeasons) {
+            public void onResponseReceived(final Integer numberOfSeasons) {
                 view.showSeasons(numberOfSeasons);
                 if(currentSeason != -1)
                   model.updateSeasonData(currentSeries, currentSeason, new ResponseReceiver<Void>() {
                       @Override public void onResponseReceived(Void response) {
                           // AREA A
+                          view.hideSearchInProgress();
+                          setSeason(numberOfSeasons);
                       }
                       @Override public void onErrorReceived(String message) {
                           // AREA B
+                          view.hideSearchInProgress();
+                          view.showError(message);
                       }
                   });
             }
             @Override public void onErrorReceived(String message) {
                 // AREA C
+                view.hideSearchInProgress();
+                view.showError(message);
             }
         });
-        */
+
 
     }
 

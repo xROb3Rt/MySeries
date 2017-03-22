@@ -131,6 +131,29 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
             }
         });
 
+    }
 
+    @Override
+    public void hideSearchInProgress(){
+        spinnerSeason.setVisibility(View.VISIBLE);
+        listEpisodes.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        noEpisodes.setVisibility(View.GONE);
+        noSeason.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showSearchInProgress(){
+        progressBar.setVisibility(View.VISIBLE);
+        spinnerSeason.setVisibility(View.GONE);
+        listEpisodes.setVisibility(View.GONE);
+        noEpisodes.setVisibility(View.GONE);
+        noSeason.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError(String error){
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_series), error, Snackbar.LENGTH_INDEFINITE); //NO ME DEJA PONER activity_series no se pq
+        snackbar.show();
     }
 }
