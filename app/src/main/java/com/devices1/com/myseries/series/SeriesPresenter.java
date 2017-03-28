@@ -84,4 +84,8 @@ public class SeriesPresenter {
     public void onEpisodeViewedChanged(int episode, boolean viewed) {
         model.setEpisodeViewed(currentSeries, currentSeason, episode, viewed);
     }
+
+    public void onDetailsRequested() {
+        view.switchToSeriesDetails(currentSeries);
+    }
 }

@@ -103,13 +103,66 @@ public class SeriesModel implements ISeriesModel {
     }
 
     @Override
-    public void updateSeasonData(Integer currentSeries, ResponseReceiver<Void> responseReceiver) {
+    public void updateSeasons(final Integer currentSeries, final ResponseReceiver<Integer> responseReceiver) {
+
+        server.findSeasons(currentSeries, new ResponseReceiver<Integer>() {
+            @Override
+            public void onResponseReceived(Integer response) {
+                SeriesData sd = db.getSeriesData(currentSeries);
+                sd.setNumberOfSeasons(response);
+                db.insertSeriesData(sd);
+                responseReceiver.onResponseReceived(sd.getNumberOfSeasons());
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+                responseReceiver.onErrorReceived(message);
+
+            }
+        });
 
     }
 
     @Override
-    public void updateSeasonData(Integer currentSeries, Integer currentSeason, ResponseReceiver<Void> responseReceiver) {
+    public void updateSeasonData(final Integer currentSeries, Integer currentSeason, final ResponseReceiver<Void> responseReceiver) {
 
+        server.findSeason(currentSeries, currentSeason, new ResponseReceiver<SeasonData>() {
+            @Override
+            public void onResponseReceived(SeasonData response) {
+                db.insertSeasonData(currentSeries,response);
+                responseReceiver.onResponseReceived(null);
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+                responseReceiver.onErrorReceived(message);
+
+            }
+        });
+
+    }
+
+    @Override
+    public String getSeriesSummary(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getSummary();
+    }
+    @Override
+    public String getSeriesFirstAired(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getFirstAired();
+    }
+    @Override
+    public String getSeriesNetwork(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getNetwork();
+    }
+    @Override
+    public String getSeriesStatus(int id) {
+        SeriesData seriesData = db.getSeriesData(id);
+        return seriesData.getStatus();
     }
 
 }

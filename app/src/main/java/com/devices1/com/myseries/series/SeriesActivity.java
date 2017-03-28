@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.devices1.com.myseries.R;
 import com.devices1.com.myseries.model.SeriesModel;
+import com.devices1.com.myseries.seriesDetail.SeriesDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +156,35 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
 
     @Override
     public void showError(String error){
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_series), error, Snackbar.LENGTH_INDEFINITE); //NO ME DEJA PONER activity_series no se pq
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.activity_series), error, Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_series,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_details:
+                presenter.onDetailsRequested();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void switchToSeriesDetails(int currentSerie) {
+        int id = currentSerie;
+        Intent intent = new Intent(this, SeriesDetailActivity.class);
+        intent.putExtra(SeriesDetailActivity.SERIES_ID, id);
+        startActivity(intent);
+    }
+
+
+
 }
