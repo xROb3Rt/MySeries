@@ -16,7 +16,7 @@ public interface ISeriesModel {
     List<Boolean> getEpisodeViewed(Integer currentSeries, Integer currentSeason);
     void setEpisodeViewed(Integer currentSeries, Integer currentSeason, int episode, boolean viewed);
 
-    void updateSeasonData(Integer currentSeries, Integer currentSeason, ResponseReceiver<Void> responseReceiver);
+    void updateSeasonData(Integer currentSeries, Integer currentSeason, ResponseReceiver<SeasonData> responseReceiver);
     void updateSeasons(Integer currentSeries, ResponseReceiver<Integer> responseReceiver);
 
     String getSeriesStatus(int id);

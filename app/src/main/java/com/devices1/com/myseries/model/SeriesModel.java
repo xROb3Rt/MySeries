@@ -77,23 +77,30 @@ public class SeriesModel implements ISeriesModel {
 
     @Override
     public List<String> getEpisodeTitles(Integer currentSeries, Integer currentSeason) {
-        List<String> episodes = new ArrayList<>();
-        for (int i = 0; i< db.getSeasonData(currentSeries, currentSeason).getEpisodes().size(); i++){
-            episodes.add(db.getSeasonData(currentSeries, currentSeason).getEpisodes().toString());
+        List<String> titles = new ArrayList<>();
+        SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
+        if (seasonData == null)
+            return titles;
+        List<EpisodeInfo> episodeInfos = seasonData.getEpisodes();
+        for (EpisodeInfo episodeInfo: episodeInfos){
+            titles.add(episodeInfo.getTitle());
         }
-        return episodes;
+        return titles;
     }
 
     @Override
     public List<Boolean> getEpisodeViewed(Integer currentSeries, Integer currentSeason) {
 
         List<Boolean> episodeViewed = new ArrayList<>();
-
         SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
-        for (EpisodeInfo episode : seasonData.getEpisodes()){
-            episodeViewed.add(episode.isViewed());
-        }
+        if (seasonData == null)
+            return episodeViewed;
 
+
+        List<EpisodeInfo> episodeInfos = seasonData.getEpisodes();
+        for (EpisodeInfo episodeInfo: episodeInfos){
+            episodeViewed.add(episodeInfo.isViewed());
+        }
         return episodeViewed;
     }
 
@@ -105,42 +112,14 @@ public class SeriesModel implements ISeriesModel {
     @Override
     public void updateSeasons(final Integer currentSeries, final ResponseReceiver<Integer> responseReceiver) {
 
-        server.findSeasons(currentSeries, new ResponseReceiver<Integer>() {
-            @Override
-            public void onResponseReceived(Integer response) {
-                SeriesData sd = db.getSeriesData(currentSeries);
-                sd.setNumberOfSeasons(response);
-                db.insertSeriesData(sd);
-                responseReceiver.onResponseReceived(sd.getNumberOfSeasons());
-            }
-
-            @Override
-            public void onErrorReceived(String message) {
-
-                responseReceiver.onErrorReceived(message);
-
-            }
-        });
+        server.findSeasons(currentSeries, responseReceiver);
 
     }
 
     @Override
-    public void updateSeasonData(final Integer currentSeries, Integer currentSeason, final ResponseReceiver<Void> responseReceiver) {
+    public void updateSeasonData(final Integer currentSeries, Integer currentSeason, final ResponseReceiver<SeasonData> responseReceiver) {
 
-        server.findSeason(currentSeries, currentSeason, new ResponseReceiver<SeasonData>() {
-            @Override
-            public void onResponseReceived(SeasonData response) {
-                db.insertSeasonData(currentSeries,response);
-                responseReceiver.onResponseReceived(null);
-            }
-
-            @Override
-            public void onErrorReceived(String message) {
-
-                responseReceiver.onErrorReceived(message);
-
-            }
-        });
+        server.findSeason(currentSeries, currentSeason, responseReceiver);
 
     }
 

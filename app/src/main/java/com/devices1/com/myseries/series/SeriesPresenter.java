@@ -2,6 +2,7 @@ package com.devices1.com.myseries.series;
 
 
 import com.devices1.com.myseries.model.ISeriesModel;
+import com.devices1.com.myseries.model.SeasonData;
 import com.devices1.com.myseries.model.SeriesModel;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
 
@@ -16,12 +17,13 @@ public class SeriesPresenter {
     private int season;
     private Integer currentSeries;
     private String title;
-    private Integer numberSeasons;
-    private Integer currentSeason;
+    private int numberSeasons;
+    private int currentSeason;
 
     public SeriesPresenter(SeriesActivity view, SeriesModel model) {
         this.view = view;
         this.model = model;
+        currentSeason = -1;
     }
 
     public void onAddSeasonRequested() {
@@ -33,14 +35,15 @@ public class SeriesPresenter {
             public void onResponseReceived(final Integer numberOfSeasons) {
                 view.showSeasons(numberOfSeasons);
                 if(currentSeason != -1)
-                  model.updateSeasonData(currentSeries, currentSeason, new ResponseReceiver<Void>() {
-                      @Override public void onResponseReceived(Void response) {
-                          // AREA A
+                  model.updateSeasonData(currentSeries, currentSeason, new ResponseReceiver<SeasonData>() {
+                      @Override
+                      public void onResponseReceived(SeasonData response) {
                           view.hideSearchInProgress();
                           setSeason(numberOfSeasons);
                       }
-                      @Override public void onErrorReceived(String message) {
-                          // AREA B
+
+                      @Override
+                      public void onErrorReceived(String message) {
                           view.hideSearchInProgress();
                           view.showError(message);
                       }
@@ -63,6 +66,7 @@ public class SeriesPresenter {
         view.showTitle(title);
         numberSeasons = model.getSeriesNumberOfSeasons(series);
         view.showSeasons(numberSeasons);
+
     }
 
     public void setSeason(int currentSeason){
@@ -71,7 +75,7 @@ public class SeriesPresenter {
         List<String> titles = model.getEpisodeTitles(currentSeries, currentSeason);
         List<Boolean> viewed = model.getEpisodeViewed(currentSeries, currentSeason);
 
-        EpisodeData[] episodeData = new EpisodeData[titles.size() - 1];
+        EpisodeData[] episodeData = new EpisodeData[titles.size()];
 
         for(int i = 0; i<titles.size(); i++){
             episodeData[i] = new EpisodeData(titles.get(i), viewed.get(i));

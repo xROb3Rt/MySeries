@@ -115,7 +115,7 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
 
         List<String> seasons = new ArrayList<>();
         for (int i = 0; i< numberSeasons; i++){
-            seasons.add("Season " + i+1);
+            seasons.add("Season " + ((int)(i+1)));
 
             SpinnerAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, seasons);
             spinnerSeason.setAdapter(adapter);
@@ -133,6 +133,8 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
                 presenter.onEpisodeViewedChanged(episode, viewed);
             }
         });
+
+        listEpisodes.setAdapter(episodeRowAdapter);
 
     }
 

@@ -9,9 +9,6 @@ import android.widget.TextView;
 import com.devices1.com.myseries.R;
 import com.devices1.com.myseries.model.SeriesModel;
 
-/**
- * Created by BorisGoshev on 28/03/2017.
- */
 
 public class SeriesDetailActivity extends AppCompatActivity implements ISeriesDetailView {
 

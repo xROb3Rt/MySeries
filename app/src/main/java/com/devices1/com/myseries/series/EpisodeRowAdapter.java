@@ -25,7 +25,7 @@ public class EpisodeRowAdapter extends ArrayAdapter {
         this.listener = listener;
     }
 
-    @NonNull
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         super.getView(position, convertView, parent);
@@ -37,11 +37,13 @@ public class EpisodeRowAdapter extends ArrayAdapter {
         }else{
             view = convertView;
         }
+
         EpisodeData episodeData = (EpisodeData)getItem(position);
         TextView titleView =  (TextView) view.findViewById(R.id.title_view);
         titleView.setText(episodeData.getTitle());
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.viewed_checkbox);
         checkBox.setChecked(episodeData.getViewed());
 
-        return  view;     }
+        return  view;
+    }
 }
