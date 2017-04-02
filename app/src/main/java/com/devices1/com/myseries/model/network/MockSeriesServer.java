@@ -62,7 +62,7 @@ public class MockSeriesServer implements ISeriesServer {
 
     private static void addSeason(SeriesAndSeasons seriesAndSeasons, int seasonNumber, String ... titles) {
         SeasonData seasonData = seriesAndSeasons.createSeason(seasonNumber);
-        int number = 0;
+        int number = 1;
         for (String title : titles)
             seasonData.addEpisode(new EpisodeInfo(number++, title));
     }

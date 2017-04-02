@@ -21,4 +21,8 @@ public class EpisodeData {
 
         return title;
     }
+
+    public void setViewed(boolean viewed) {
+        this.viewed = viewed;
+    }
 }

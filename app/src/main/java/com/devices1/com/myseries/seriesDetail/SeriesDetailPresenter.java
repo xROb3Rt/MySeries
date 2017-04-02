@@ -10,7 +10,6 @@ public class SeriesDetailPresenter {
 
     private ISeriesDetailView view;
     private ISeriesModel model;
-    private int series;
 
     public SeriesDetailPresenter(ISeriesDetailView view, ISeriesModel model) {
 
@@ -19,18 +18,11 @@ public class SeriesDetailPresenter {
 
     }
     public void setSeries(int series) {
-
-        String summary = model.getSeriesSummary(series);
-        view.showSummary(summary);
-
-        String firstAired = model.getSeriesFirstAired(series);
-        view.showFirstAired(firstAired);
-
-        String network = model.getSeriesNetwork(series);
-        view.showNetwork(network);
-
-        String status = model.getSeriesStatus(series);
-        view.showStatus(status);
+        view.showTitle(model.getSeriesTitle(series));
+        view.showFirstAired(model.getSeriesFirstAired(series));
+        view.showNetwork(model.getSeriesNetwork(series));
+        view.showStatus(model.getSeriesStatus(series));
+        view.showSummary(model.getSeriesSummary(series));
     }
 
 }

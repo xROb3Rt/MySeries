@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.devices1.com.myseries.R;
@@ -38,11 +39,25 @@ public class EpisodeRowAdapter extends ArrayAdapter {
             view = convertView;
         }
 
-        EpisodeData episodeData = (EpisodeData)getItem(position);
+        final EpisodeData episodeData = (EpisodeData)getItem(position);
         TextView titleView =  (TextView) view.findViewById(R.id.title_view);
         titleView.setText(episodeData.getTitle());
+
+
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.viewed_checkbox);
+        checkBox.setOnCheckedChangeListener(null);
         checkBox.setChecked(episodeData.getViewed());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                episodeData.setViewed(isChecked);
+                if(listener != null){
+                    listener.onViewedChanged(position + 1,isChecked);
+                }
+            }
+
+        });
 
         return  view;
     }

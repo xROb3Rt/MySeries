@@ -109,18 +109,17 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
             progressBar.setVisibility(View.GONE);
             noEpisodes.setVisibility(View.GONE);
             noSeason.setVisibility(View.GONE);
-
-
             }
 
         List<String> seasons = new ArrayList<>();
         for (int i = 0; i< numberSeasons; i++){
             seasons.add("Season " + ((int)(i+1)));
-
-            SpinnerAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, seasons);
-            spinnerSeason.setAdapter(adapter);
-
         }
+
+        SpinnerAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, seasons);
+        int current = spinnerSeason.getSelectedItemPosition();
+        spinnerSeason.setAdapter(adapter);
+        spinnerSeason.setSelection(current);
     }
 
     @Override
@@ -181,12 +180,9 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
 
     @Override
     public void switchToSeriesDetails(int currentSerie) {
-        int id = currentSerie;
         Intent intent = new Intent(this, SeriesDetailActivity.class);
-        intent.putExtra(SeriesDetailActivity.SERIES_ID, id);
+        intent.putExtra(SeriesDetailActivity.SERIES_ID, currentSerie);
         startActivity(intent);
     }
-
-
 
 }

@@ -59,11 +59,9 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
 
     @Override
     public void switchToAddSeries(String name) {
-        // Create the Intent
+
         Intent intent = new Intent(this, AddSeriesActivity.class);
-        // Add the parameters to AddSeriesActivity
         intent.putExtra(AddSeriesActivity.SERIES_TITLE, name);
-        // Start the activity:
         startActivity(intent);
     }
 
@@ -71,8 +69,6 @@ public class MySeriesActivity extends AppCompatActivity implements AskNameDialog
     protected void onStart() {
         super.onStart();
         presenter.onViewRestarted();
-
-
     }
 
     @Override
