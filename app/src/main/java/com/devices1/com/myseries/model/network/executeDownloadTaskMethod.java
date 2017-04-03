@@ -4,6 +4,13 @@ package com.devices1.com.myseries.model.network;//
 // Include the interface and the method inside the TheTVDBServer class
 //
 /*
+   private static final String TOKEN_ERROR = "I could not get a token from the server";
+   private static final String NETWORK_ERROR = "Network error";
+   private static final String NETWORK_NOT_CONNECTED = "Network not connected";
+   private static final String BAD_CODE_FROM_SERVER = "Bad code from server";
+   private static final String BAD_JSON_IN_SERVER_RESPONSE = "Bad JSON in server response";
+
+
    private interface DownloadTask<T> {
         String doDownload() throws IOException, UnexpectedCodeException;
 

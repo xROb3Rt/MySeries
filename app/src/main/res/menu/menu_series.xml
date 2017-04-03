@@ -3,6 +3,6 @@
 
     <item android:title="Info"
         android:id="@+id/action_details"
-        android:icon="@drawable/info"
+        android:icon="@android:drawable/ic_menu_info_details"
         android:showAsAction="always" />
 </menu>

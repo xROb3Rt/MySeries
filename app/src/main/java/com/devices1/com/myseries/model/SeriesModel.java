@@ -113,14 +113,39 @@ public class SeriesModel implements ISeriesModel {
     @Override
     public void updateSeasons(final Integer currentSeries, final ResponseReceiver<Integer> responseReceiver) {
 
-        server.findSeasons(currentSeries, responseReceiver);
+        server.findSeasons(currentSeries, new ResponseReceiver<Integer>() {
+            @Override
+            public void onResponseReceived(Integer response) {
+                SeriesData seriesData = db.getSeriesData(currentSeries);
+                seriesData.setNumberOfSeasons(response);
+                db.insertSeriesData(seriesData);
+                responseReceiver.onResponseReceived(seriesData.getNumberOfSeasons());
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+                responseReceiver.onErrorReceived(message);
+            }
+        });
 
     }
 
     @Override
     public void updateSeasonData(final Integer currentSeries, Integer currentSeason, final ResponseReceiver<SeasonData> responseReceiver) {
 
-        server.findSeason(currentSeries, currentSeason, responseReceiver);
+        server.findSeason(currentSeries, currentSeason, new ResponseReceiver<SeasonData>() {
+            @Override
+            public void onResponseReceived(SeasonData response) {
+                db.insertSeasonData(currentSeries,response);
+                responseReceiver.onResponseReceived(null);
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+                responseReceiver.onErrorReceived(message);
+
+            }
+        });
 
     }
 
