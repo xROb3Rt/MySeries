@@ -6,11 +6,13 @@ public class EpisodeData {
 
     private String title;
     private Boolean viewed;
+    private String summary;
 
-    public EpisodeData(String title, Boolean viewed) {
+    public EpisodeData(String title, Boolean viewed, String summary) {
 
         this.title = title;
         this.viewed = viewed;
+        this.summary = summary;
     }
 
     public Boolean getViewed() {
@@ -18,11 +20,14 @@ public class EpisodeData {
     }
 
     public String getTitle() {
-
         return title;
     }
 
     public void setViewed(boolean viewed) {
         this.viewed = viewed;
+    }
+
+    public String getSummary(){
+        return  summary;
     }
 }

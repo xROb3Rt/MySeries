@@ -21,10 +21,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import static com.devices1.com.myseries.model.network.NetworkHelper.downloadUrl;
 
-/**
- * Created by BorisGoshev on 04/04/2017.
- */
-
 //B53993531D04A9CA API
 
 public class TheTVDBServer implements ISeriesServer {
@@ -141,7 +137,7 @@ public class TheTVDBServer implements ISeriesServer {
                 SeasonData seasonData = new SeasonData(seasonNumber);
                 for(int i = 0;i<jsonDataArray.length();i++){
                     JSONObject jsonData = jsonDataArray.getJSONObject(i);
-                    seasonData.addEpisode(new EpisodeInfo(jsonData.getInt("airedEpisodeNumber"),jsonData.getString("episodeName")));
+                    seasonData.addEpisode(new EpisodeInfo(jsonData.getInt("airedEpisodeNumber"),jsonData.getString("episodeName"), jsonData.getString("overview")));
                 }
                 responseReceiver.onResponseReceived(seasonData);
 

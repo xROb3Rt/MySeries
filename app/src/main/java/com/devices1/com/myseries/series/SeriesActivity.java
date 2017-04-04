@@ -146,7 +146,7 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
     @Override
     public void showEpisodes(EpisodeData[] episodeData) {
 
-        EpisodeRowAdapter episodeRowAdapter = new EpisodeRowAdapter(getApplicationContext(), episodeData, new EpisodeRowAdapter.IViewedChanged()
+        EpisodeRowAdapter episodeRowAdapter = new EpisodeRowAdapter(SeriesActivity.this, episodeData, new EpisodeRowAdapter.IViewedChanged()
         {
             @Override
             public void onViewedChanged(int episode, boolean viewed) {

@@ -78,9 +78,11 @@ public class SeriesModel implements ISeriesModel {
     @Override
     public List<String> getEpisodeTitles(Integer currentSeries, Integer currentSeason) {
         List<String> titles = new ArrayList<>();
+
         SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
         if (seasonData == null)
             return titles;
+
         List<EpisodeInfo> episodeInfos = seasonData.getEpisodes();
         for (EpisodeInfo episodeInfo: episodeInfos){
             titles.add(episodeInfo.getTitle());
@@ -92,6 +94,7 @@ public class SeriesModel implements ISeriesModel {
     public List<Boolean> getEpisodeViewed(Integer currentSeries, Integer currentSeason) {
 
         List<Boolean> episodeViewed = new ArrayList<>();
+
         SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
         if (seasonData == null)
             return episodeViewed;
@@ -103,6 +106,23 @@ public class SeriesModel implements ISeriesModel {
         }
         return episodeViewed;
     }
+
+    @Override
+    public List<String> getEpisodeSummaries(Integer currentSeries, int currentSeason) {
+        List<String> episodeSummaries  = new ArrayList<>();
+
+        SeasonData seasonData = db.getSeasonData(currentSeries, currentSeason);
+        if (seasonData == null)
+            return episodeSummaries ;
+
+        List<EpisodeInfo> episodeInfos = seasonData.getEpisodes();
+        for (EpisodeInfo episodeInfo: episodeInfos){
+            episodeSummaries.add(episodeInfo.getSummary());
+        }
+
+        return episodeSummaries ;
+    }
+
 
     @Override
     public void setEpisodeViewed(Integer currentSeries, Integer currentSeason, int episode, boolean viewed) {

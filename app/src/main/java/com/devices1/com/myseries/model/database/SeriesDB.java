@@ -34,6 +34,7 @@ public class SeriesDB extends SQLiteOpenHelper implements ISeriesDB {
     public static final String EPISODES_SERIES_ID = "SERIES_ID";
     public static final String EPISODES_SEASON = "SEASON";
     public static final String EPISODES_NUMBER = "NUMBER";
+    public static final String EPISODES_SUMMARY = "SUMMARY";
     public static final String INTEGER = "integer";
     public static final String EPISODES_TITLE = "TITLE";
     public static final String EPISODES_VIEWED = "VIEWED";
@@ -58,6 +59,7 @@ public class SeriesDB extends SQLiteOpenHelper implements ISeriesDB {
                 + EPISODES_NUMBER + " " + INTEGER + ","
                 + EPISODES_TITLE + " " + TEXT + ","
                 + EPISODES_VIEWED + " " + INTEGER_NOT_NULL + ","
+                + EPISODES_SUMMARY + " " + TEXT + ","
                 + FOREIGN_KEY + "( " + EPISODES_SERIES_ID + ")" + REFERENCES + " SERIES(" + SERIES_ID + "),"
                 + PRIMARY_KEY + "(" + EPISODES_SERIES_ID + "," + EPISODES_SEASON + "," + EPISODES_NUMBER + "));";
         sqLiteDatabase.execSQL(create);
@@ -153,6 +155,7 @@ public class SeriesDB extends SQLiteOpenHelper implements ISeriesDB {
             contentValues.put(EPISODES_NUMBER,episodeInfo.getNumber());
             contentValues.put(EPISODES_TITLE,episodeInfo.getTitle());
             contentValues.put(EPISODES_VIEWED,episodeInfo.isViewed());
+            contentValues.put(EPISODES_SUMMARY, episodeInfo.getSummary());
             db.insertWithOnConflict(EPISODES,null,contentValues,SQLiteDatabase.CONFLICT_IGNORE);
         }
     }
@@ -160,7 +163,7 @@ public class SeriesDB extends SQLiteOpenHelper implements ISeriesDB {
     @Override
     public SeasonData getSeasonData(int id, int seasonNumber) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(EPISODES,new String[]{EPISODES_NUMBER,EPISODES_TITLE,EPISODES_VIEWED},
+        Cursor cursor = db.query(EPISODES,new String[]{EPISODES_NUMBER,EPISODES_TITLE,EPISODES_VIEWED,EPISODES_SUMMARY},
                 EPISODES_SERIES_ID + "=? AND " + EPISODES_SEASON + "=?",
                 new String[]{Integer.toString(id),Integer.toString(seasonNumber)},
                 null,
@@ -176,7 +179,8 @@ public class SeriesDB extends SQLiteOpenHelper implements ISeriesDB {
                 int number = cursor.getInt(0);
                 String title = cursor.getString(1);
                 int viewed = cursor.getInt(2);
-                EpisodeInfo info = new EpisodeInfo(number,title);
+                String summary = cursor.getString(3);
+                EpisodeInfo info = new EpisodeInfo(number, title, summary);
                 info.setViewed(viewed==1);
                 seasonData.addEpisode(info);
             }

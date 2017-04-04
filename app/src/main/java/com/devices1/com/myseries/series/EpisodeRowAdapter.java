@@ -6,17 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.devices1.com.myseries.R;
+import com.devices1.com.myseries.seriesDetail.ShowSummaryDialog;
 
 
 public class EpisodeRowAdapter extends ArrayAdapter {
 
     private final IViewedChanged listener;
-    public interface IViewedChanged{
+
+    public interface IViewedChanged {
         void onViewedChanged(int episode, boolean viewed);
     }
 
@@ -32,16 +35,29 @@ public class EpisodeRowAdapter extends ArrayAdapter {
 
         View view;
 
-        if(convertView == null){
+        if (convertView == null) {
             view = LayoutInflater.from(getContext()).inflate(R.layout.episode_row, parent, false);
-        }else{
+        } else {
             view = convertView;
         }
 
-        final EpisodeData episodeData = (EpisodeData)getItem(position);
-        TextView titleView =  (TextView) view.findViewById(R.id.title_view);
+        final EpisodeData episodeData = (EpisodeData) getItem(position);
+        TextView titleView = (TextView) view.findViewById(R.id.title_view);
         titleView.setText(episodeData.getTitle());
+        titleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowSummaryDialog.showSummary(getContext(), episodeData.getSummary());
+            }
+        });
 
+        Button buttonSummary = (Button) view.findViewById(R.id.summary_button);
+        buttonSummary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowSummaryDialog.showSummary(getContext(), episodeData.getSummary());
+            }
+        });
 
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.viewed_checkbox);
         checkBox.setOnCheckedChangeListener(null);
@@ -51,12 +67,14 @@ public class EpisodeRowAdapter extends ArrayAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 episodeData.setViewed(isChecked);
-                if(listener != null){
-                    listener.onViewedChanged(position + 1,isChecked);
+                if (listener != null) {
+                    listener.onViewedChanged(position + 1, isChecked);
                 }
             }
 
         });
+
+
 
         return  view;
     }

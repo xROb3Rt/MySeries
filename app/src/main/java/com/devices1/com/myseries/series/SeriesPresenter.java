@@ -72,11 +72,12 @@ public class SeriesPresenter {
         this.currentSeason = currentSeason;
         List<String> titles = model.getEpisodeTitles(currentSeries, currentSeason);
         List<Boolean> viewed = model.getEpisodeViewed(currentSeries, currentSeason);
+        List<String> summaries = model.getEpisodeSummaries(currentSeries, currentSeason);
 
         EpisodeData[] episodeData = new EpisodeData[titles.size()];
 
         for(int i = 0; i<titles.size(); i++){
-            episodeData[i] = new EpisodeData(titles.get(i), viewed.get(i));
+            episodeData[i] = new EpisodeData(titles.get(i), viewed.get(i), summaries.get(i));
         }
 
         view.showEpisodes(episodeData);
