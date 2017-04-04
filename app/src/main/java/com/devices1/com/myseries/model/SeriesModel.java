@@ -9,6 +9,7 @@ import com.devices1.com.myseries.model.database.SeriesDB;
 import com.devices1.com.myseries.model.network.ISeriesServer;
 import com.devices1.com.myseries.model.network.MockSeriesServer;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
+import com.devices1.com.myseries.model.network.TheTVDBServer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,7 @@ public class SeriesModel implements ISeriesModel {
 
     public static SeriesModel getInstance(Context context) {
         if (instance == null)
-            instance = new SeriesModel( new MockSeriesServer(), new SeriesDB(context));
+            instance = new SeriesModel( new TheTVDBServer(context), new SeriesDB(context));
         return instance;
     }
 

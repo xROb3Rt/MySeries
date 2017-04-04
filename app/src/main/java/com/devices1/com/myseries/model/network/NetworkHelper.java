@@ -13,9 +13,6 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by jvilar on 3/04/15.
- */
 public class NetworkHelper {
     private static String TAG = NetworkHelper.class.getSimpleName();
 
@@ -33,6 +30,7 @@ public class NetworkHelper {
     }
 
     public static boolean isNetworkConnected(Context context) {
+        
         ConnectivityManager connMgr = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
