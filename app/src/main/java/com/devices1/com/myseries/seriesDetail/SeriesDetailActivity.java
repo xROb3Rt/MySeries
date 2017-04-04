@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.devices1.com.myseries.R;
@@ -26,6 +27,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements ISeriesDe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_series_detail);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         textViewSummary = (TextView) findViewById(R.id.textViewSummary);
         textViewFirstAired = (TextView) findViewById(R.id.textViewFirstAired);
@@ -42,6 +45,8 @@ public class SeriesDetailActivity extends AppCompatActivity implements ISeriesDe
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(title);
     }
+
+
     @Override
     public void showSummary(String summary) {
         textViewSummary.setText(summary);

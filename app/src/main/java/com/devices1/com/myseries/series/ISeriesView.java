@@ -1,9 +1,6 @@
 package com.devices1.com.myseries.series;
 
 
-import com.devices1.com.myseries.model.network.ResponseReceiver;
-
-import java.util.List;
 
 public interface ISeriesView {
 

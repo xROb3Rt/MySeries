@@ -1,8 +1,5 @@
 package com.devices1.com.myseries.model.database;
 
-/**
- * Created by BorisGoshev on 02/04/2017.
- */
 
 import android.content.ContentValues;
 import android.content.Context;

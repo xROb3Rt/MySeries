@@ -1,7 +1,5 @@
 package com.devices1.com.myseries.addSeries;
 
-import com.devices1.com.myseries.model.SeriesData;
-
 import java.util.List;
 
 public interface IAddSeriesView {

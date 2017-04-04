@@ -1,6 +1,5 @@
 package com.devices1.com.myseries.mySeries;
 
-import android.content.Context;
 
 import com.devices1.com.myseries.model.ISeriesModel;
 

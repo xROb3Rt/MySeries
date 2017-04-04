@@ -23,6 +23,10 @@
             android:name=".series.SeriesActivity"
             android:label="@string/title_activity_series"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".seriesDetail.SeriesDetailActivity"
+            android:label="@string/title_activity_series_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

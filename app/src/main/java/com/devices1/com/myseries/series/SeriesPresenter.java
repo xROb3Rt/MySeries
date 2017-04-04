@@ -5,8 +5,6 @@ import com.devices1.com.myseries.model.ISeriesModel;
 import com.devices1.com.myseries.model.SeasonData;
 import com.devices1.com.myseries.model.SeriesModel;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SeriesPresenter {

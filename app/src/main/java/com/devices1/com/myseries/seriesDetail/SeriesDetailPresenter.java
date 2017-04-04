@@ -2,9 +2,6 @@ package com.devices1.com.myseries.seriesDetail;
 
 import com.devices1.com.myseries.model.ISeriesModel;
 
-/**
- * Created by BorisGoshev on 28/03/2017.
- */
 
 public class SeriesDetailPresenter {
 

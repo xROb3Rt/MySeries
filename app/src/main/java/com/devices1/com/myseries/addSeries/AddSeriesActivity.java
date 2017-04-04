@@ -1,6 +1,5 @@
 package com.devices1.com.myseries.addSeries;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +14,7 @@ import android.widget.TextView;
 
 import com.devices1.com.myseries.MySeriesActivity;
 import com.devices1.com.myseries.R;
-import com.devices1.com.myseries.model.SeriesData;
 import com.devices1.com.myseries.model.SeriesModel;
-import com.devices1.com.myseries.mySeries.IMySeriesView;
 
 import java.util.List;
 

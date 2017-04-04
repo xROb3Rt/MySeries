@@ -1,9 +1,5 @@
 package com.devices1.com.myseries.model;
 
-/**
- * Created by jvilar on 10/02/17.
- */
-
 public class EpisodeInfo {
     private boolean viewed;
     private final int number;

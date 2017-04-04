@@ -4,10 +4,8 @@ package com.devices1.com.myseries.model;
 import android.content.Context;
 
 import com.devices1.com.myseries.model.database.ISeriesDB;
-import com.devices1.com.myseries.model.database.MockSeriesDB;
 import com.devices1.com.myseries.model.database.SeriesDB;
 import com.devices1.com.myseries.model.network.ISeriesServer;
-import com.devices1.com.myseries.model.network.MockSeriesServer;
 import com.devices1.com.myseries.model.network.ResponseReceiver;
 import com.devices1.com.myseries.model.network.TheTVDBServer;
 
