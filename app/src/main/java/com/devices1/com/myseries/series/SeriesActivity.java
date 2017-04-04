@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -36,6 +37,7 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
     private TextView noSeason;
     private List<String> titles = new ArrayList<>();
     private List<EpisodeData> episodeData;
+    private Button showSummary;
 
 
     private SeriesPresenter presenter;
@@ -53,6 +55,7 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
         progressBar = (ProgressBar) findViewById(R.id.progressBarSeries);
         noEpisodes = (TextView) findViewById(R.id.textNoEpisodes);
         noSeason = (TextView) findViewById(R.id.textNoSeason);
+        showSummary = (Button) findViewById(R.id.summary_button);
 
         SeriesModel model = SeriesModel.getInstance(this);
         presenter = new SeriesPresenter(this, model);
@@ -80,10 +83,29 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
                     }
                 });
 
+        
+
         Intent intent = getIntent();
         int serieID = intent.getIntExtra(SERIE_ID, 0);
         presenter.setSeries(serieID);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_series,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_details:
+                presenter.onDetailsRequested();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -160,22 +182,7 @@ public class SeriesActivity extends AppCompatActivity implements ISeriesView {
         snackbar.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_series,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.action_details:
-                presenter.onDetailsRequested();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     public void switchToSeriesDetails(int currentSerie) {

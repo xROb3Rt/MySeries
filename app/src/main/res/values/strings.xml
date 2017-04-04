@@ -3,5 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_series">SeriesActivity</string>
     <string name="title_activity_series_detail">SeriesDetailActivity</string>
+    <string name="title_activity_series_details">SeriesDetailsActivity</string>
 
 </resources>
