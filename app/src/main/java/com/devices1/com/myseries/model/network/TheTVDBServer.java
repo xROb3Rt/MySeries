@@ -25,13 +25,13 @@ import static com.devices1.com.myseries.model.network.NetworkHelper.downloadUrl;
  * Created by BorisGoshev on 04/04/2017.
  */
 
-//471A3D5DA63533C9 API
+//B53993531D04A9CA API
 
 public class TheTVDBServer implements ISeriesServer {
 
-    private static final String APIKey = "471A3D5DA63533C9";
-    private static final String username = "basurabobbs";
-    private static final String userkey = "F69D9D29E80714AA";
+    private static final String APIKey = "B53993531D04A9CA";
+    private static final String username = "borisgg";
+    private static final String userkey = "7A68BB15812B7B0B";
 
     private static final String BASE_URL = "https://api.thetvdb.com";
     private static final String LOGIN_URL = BASE_URL + "/login";
